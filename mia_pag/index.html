@@ -16,29 +16,35 @@
 <body>
     <script src="index.js"></script>
     <form>
-        <label for="mezzi">Inserisci nuova giornata:<br><br></label>
-        mezzo/i:<br>
-        <select name="mezzi" id="giornata" multiple required>
-            <option value="Vivalto">Vivalto</option>
-            <option value="PR">Piano Ribassato</option>
-            <option value="MD">Media Distanza</option>
-            <option value="Caravaggio">Caravaggio</option>
-        </select>
-        <br><br>
-        Data:
-        <input type="date" name="data" id="data">
-        <!--dEfault:today-->
-        <br><br><label for="puntualita">Inserisci la puntualità:<br></label>
-        <select name="puntualita" id="puntualita" required>
-            <option value="1">Ottima</option>
-            <option value="2">Media</option>
-            <option value="3">Poca</option>
-        </select>
-        <br><br>
-        <label for="controllo">controllore?</label> <input type="checkbox" name="controllo" id="controllo">
         <br>
-        <br><br>
-        <input type="button" id="submit" value="Submit">
+        <label for="mezzi" style="background-color: aqua;">
+            <span style="background-color: aqua;">Inserisci nuova giornata</span>
+        </label>
+
+        <div id="esplode" style="display:none">
+            <br>mezzo/i:<br>
+            <select name="mezzi" id="giornata" multiple required>
+                <option value="Vivalto">Vivalto</option>
+                <option value="PR">Piano Ribassato</option>
+                <option value="MD">Media Distanza</option>
+                <option value="Caravaggio">Caravaggio</option>
+            </select>
+            <br><br>
+            Data:
+            <input type="date" name="data" id="data">
+            <!--dEfault:today-->
+            <br><br><label for="puntualita">Inserisci la puntualità:<br></label>
+            <select name="puntualita" id="puntualita" required>
+                <option value="1">Ottima</option>
+                <option value="2">Media</option>
+                <option value="3">Poca</option>
+            </select>
+            <br><br>
+            <label for="controllo">controllore?</label> <input type="checkbox" name="controllo" id="controllo">
+            <br>
+            <br><br>
+            <input type="button" id="submit" value="Submit">
+        </div>
     </form>
 </body>
 

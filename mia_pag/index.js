@@ -11,24 +11,23 @@ $(() => {
                 alert("error");
             })
     })
-    // GIT
-    // GIT
-    // GIT
-    // GIT
-    // GIT
-    // GIT
-    // GIT
+
+    $("label:eq(0)").click(() => {
+        $("#esplode").toggle("slow");
+    })
+
+
     $.get("/all").done(function (mappa) {
         Object.keys(mappa).forEach(key => {
-            console.log(`mappa[key]`, mappa[key]);
+
             strMateriali =
                 mappa[key].Materiali.map(mat => {
-                    if (mat == 1) return "Vivalto";
-                    if (mat == 2) return "PR";
-                    if (mat == 3) return "MD";
-                    if (mat == 4) return "Caravaggio";
+                    if (mat == 1) return "<img width='90' src='/vivalto.png'>";
+                    if (mat == 2) return "<img width='90' src='/pr.png'>";
+                    if (mat == 3) return "<img width='90' src='/md.png'>";
+                    if (mat == 4) return "<img width='90' src='/caravaggio.png'>";
                 }).join()
-            $("body").append("<div>" + mappa[key].data.toLocaleString().substr(0, 10) + strMateriali + "</div>")
+            $("body").prepend("<div>" + mappa[key].data.toLocaleString().substr(0, 10) + strMateriali + "</div>")
         })
     })
         .fail(function () {
