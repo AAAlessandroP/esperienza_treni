@@ -16,23 +16,58 @@ $(() => {
         $("#esplode").toggle("slow");
     })
 
-
+    var arrayPerGrafico = [];//alla pos 0 c'è il counter di vivalto su cui son salito, [1] di pr, ...
     $.get("/all").done(function (mappa) {
         Object.keys(mappa).forEach(key => {
 
             strMateriali =
                 mappa[key].Materiali.map(mat => {
+                    // console.log(`mat`, mat);
+                    if (arrayPerGrafico[mat - 1] === undefined)
+                        arrayPerGrafico[mat - 1] = 1
+                    else arrayPerGrafico[mat - 1]++
+
                     if (mat == 1) return "<img width='90' src='/vivalto.png'>";
                     if (mat == 2) return "<img width='90' src='/pr.png'>";
                     if (mat == 3) return "<img width='90' src='/md.png'>";
                     if (mat == 4) return "<img width='90' src='/caravaggio.png'>";
                 }).join()
-            $("body").prepend("<div>" + mappa[key].data.toLocaleString().substr(0, 10) + strMateriali + "</div>")
+            $("body").append("<div>" + mappa[key].data.toLocaleString().substr(0, 10) + strMateriali + "</div>")
         })
+
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const data = {
+            labels: ['Vivalto', 'PR', 'MD', 'Caravaggio'],
+            datasets: [
+                {
+                    label: 'Dataset 1',
+                    data: arrayPerGrafico,
+                    backgroundColor: ["#0040ff", '#267326', '#006600', '#00ff00'],
+                }
+            ]
+        };
+        const myChart = new Chart(ctx, {
+            type: 'pie',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Mezzi presi'
+                    }
+                }
+            }
+        });
     })
         .fail(function () {
             alert("error");
         })
+
+
 })
 
 // var data = {
