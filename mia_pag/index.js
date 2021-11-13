@@ -16,6 +16,7 @@ $(() => {
         $("#esplode").toggle("slow");
     })
 
+
     var arrayPerGrafico = [];//alla pos 0 c'è il counter di vivalto su cui son salito, [1] di pr, ...
     $.get("/all").done(function (mappa) {
         Object.keys(mappa).forEach(key => {
@@ -66,6 +67,49 @@ $(() => {
         .fail(function () {
             alert("error");
         })
+
+
+    $.get("/allPuntualita").done(function (puntualita) {
+
+        var mappaPuntualita = {}//1 => 13; 2=> 15; 3=>56 //cioè 13 volte sono stati scarsamente puntuali, 2 volte son stati ...
+
+        for (let i = 0; i < puntualita.length; i++) {
+            if (mappaPuntualita[puntualita[i].Puntualita] === undefined)
+                mappaPuntualita[puntualita[i].Puntualita] = 1
+            else mappaPuntualita[puntualita[i].Puntualita]++
+        }
+
+        const ctx2 = document.getElementById('chartPuntualita').getContext('2d');
+        const data2 = {
+            labels: ['Ottima', 'Media', 'Poca'],
+            datasets: [
+                {
+                    label: 'Dataset 1',
+                    data: Object.values(mappaPuntualita),
+                    backgroundColor: ["#00ff00", '#ff6600', '#cc0000'],
+                }
+            ]
+        };
+
+        const myChart2 = new Chart(ctx2, {
+            type: 'pie',
+            data: data2,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Puntualità riscontrata'
+                    }
+                }
+            }
+        });
+    }).fail(function () {
+        alert("error");
+    })
 
 
 })

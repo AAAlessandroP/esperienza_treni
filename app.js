@@ -81,6 +81,17 @@ con.connect(function (err) {
 
                 });
                 res.json(mappa)
+
+            });
+
+    });
+
+    app.get("/allPuntualita", async (req, res) => {
+
+        con.query(s = `SELECT Puntualita FROM Giornate;`
+            , function (err, result, fields) {
+                if (err) throw err;
+                res.json(result)
             });
     });
 
