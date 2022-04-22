@@ -54,6 +54,12 @@ con.connect(function (err) {
                 case "Caravaggio":
                     idMateriale = 4
                     break;
+                case "Casaralta":
+                    idMateriale = 5
+                    break;
+                case "TAF":
+                    idMateriale = 6
+                    break;
                 default: throw new Error()
                     break;
             }
@@ -74,14 +80,13 @@ con.connect(function (err) {
                 if (err) throw err;
                 var mappa = {}
                 result.forEach(element => {
-                    if (mappa[element.data] === undefined)
+                    if (mappa[element.data] === undefined) {
                         mappa[element.data] = { Materiali: [element.Materiale], Puntualita: element.Puntualita, data: element.data, Controllore: element.Controllore }
-                    else
+                    } else {
                         mappa[element.data].Materiali.push(element.Materiale)
-
+                    }
                 });
                 res.json(mappa)
-
             });
 
     });
