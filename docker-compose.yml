@@ -1,4 +1,4 @@
-# se qualcosa non funziona, è forse perchè compose usa i cont che già ha buildato dal dockerfile vecchio, 
+# se qualcosa non funziona, è forse perchè compose usa i cont che già ha buildato dal dockerfile vecchio,
 # non li ricrea onTheFly dal dockerfile ogni volta
 
 # docker rm treni_web_1
@@ -12,6 +12,8 @@ services:
       - db-pma-net
     environment:
       MYSQL_ROOT_PASSWORD: my-secret-pw
+    volumes:
+      - ./mysqlz.sql:/docker-entrypoint-initdb.d/dummy1.sql
     ports:
       - "3307:3306"
       # ports: \ X:Y per connettermi dall'interno del network a lui uso Y e dall'host la porta X
@@ -22,12 +24,12 @@ services:
       - db-pma-net
     build:
       context: .
-      target: debug
+      target: prod #lo tolgo se uso prod
     volumes: #lo tolgo se uso prod
       - .:/work #lo tolgo se uso prod
     ports:
       - "3000:3000"
-#tolgo il servizio phpmyadmin per prod      
+#tolgo il servizio phpmyadmin per prod
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:5.0.2
     networks:

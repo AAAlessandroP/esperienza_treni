@@ -34,18 +34,19 @@ $(() => {
                     if (mat == 4) return "<img width='90' src='/caravaggio.png'>";
                     if (mat == 5) return "<img width='90' src='/casaralta.png'>";
                     if (mat == 6) return "<img width='90' src='/taf.jpg'>";
+                    if (mat == 7) return "<img width='90' src='/donizzetti.jpg'>";
                 }).join()
             $("body").append("<div>" + mappa[key].data.toLocaleString().substr(0, 10) + strMateriali + "</div>")
         })
 
         const ctx = document.getElementById('myChart').getContext('2d');
         const data = {
-            labels: ['Vivalto', 'PR', 'MD', 'Caravaggio', 'Casaralta', "TAF"],
+            labels: ['Vivalto', 'PR', 'MD', 'Caravaggio', 'Casaralta', "TAF", "Donizzetti"],
             datasets: [
                 {
                     label: 'Dataset 1',
                     data: arrayPerGrafico,
-                    backgroundColor: ["#0040ff", '#267326', '#006600', '#00ff00', '#99ff99', '#8B07F2'],
+                    backgroundColor: ["#0040ff", '#267326', '#006600', '#00ff00', '#99ff99', '#8B07F2', '#ffff99'],
                 }
             ]
         };
